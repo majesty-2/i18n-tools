@@ -4,7 +4,7 @@ const EN_PATH = "./projects/frame/locale/messages.en.xlf";
 
 const readFileTransUnitTags = (dir) => {
     const file = fs.readFileSync(dir, 'utf-8');
-    const reg = /[ ]*<trans-unit[\s\S]*?>[\s\S]*?(<\/trans-unit>)/mg;
+    const reg = /[\s]*<trans-unit[\s\S]*?>[\s\S]*?(<\/trans-unit>)/mg;
     return file.match(reg);
 }
 
@@ -28,12 +28,12 @@ const generateTransUnitTagIds = (transUnitTag) => {
 }
 
 const readContextGroupTags = (transUnit) => {
-    const reg = /[ ]*<context-group[\s\S]*>[\s\S]*<\/context-group.*>/mg;
+    const reg = /[\s]*<context-group[\s\S]*>[\s\S]*<\/context-group.*>/mg;
     return transUnit.match(reg).join('');
 }
 
 const generateTransUnitTagAfterMergeContextGroup = (transUnit, mergeContextGroup) => {
-    const reg = /[ ]*<context-group[\s\S]*>[\s\S]*<\/context-group.*>/mg;
+    const reg = /[\s]*<context-group[\s\S]*>[\s\S]*<\/context-group.*>/mg;
     if (transUnit.match(reg)) {
         return transUnit.replace(transUnit.match(reg).join(''), mergeContextGroup);
     }
